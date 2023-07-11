@@ -18,7 +18,7 @@ declare(strict_types = 1);
  * Twitter: JackMTaylor_
  *
  * This software is distributed under "GNU General Public License v3.0".
- * This license allows you to use it and/or modify it but you are not at
+ * This license allows you to use it and/or modify it, but you are not at
  * all allowed to sell this plugin at any cost. If found doing so the
  * necessary action required would be taken.
  *
@@ -35,7 +35,7 @@ declare(strict_types = 1);
 
 namespace JackMD\NameSpaceRemover;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class CustomPlayer extends Player{
 
@@ -52,7 +52,6 @@ class CustomPlayer extends Player{
 
 			$this->username = $username;
 			$this->displayName = $username;
-			$this->iusername = strtolower($username);
 
 			return $username;
 		}
@@ -73,33 +72,11 @@ class CustomPlayer extends Player{
 
 			$this->username = $displayName;
 			$this->displayName = $displayName;
-			$this->iusername = strtolower($displayName);
 
 			return $displayName;
 		}
 
 		return $displayName;
-	}
-
-	/**
-	 * Returns the lowercase name of the player replacing the spaces in players name.
-	 *
-	 * @return string
-	 */
-	public function getLowerCaseName(): string{
-		$iusername = $this->iusername;
-
-		if($this->hasSpaces($iusername)){
-			$iusername = str_replace(" ", "_", $iusername);
-
-			$this->username = $iusername;
-			$this->displayName = $iusername;
-			$this->iusername = strtolower($iusername);
-
-			return $iusername;
-		}
-
-		return $iusername;
 	}
 
 	/**
@@ -109,6 +86,6 @@ class CustomPlayer extends Player{
 	 * @return bool
 	 */
 	private function hasSpaces(string $string): bool{
-		return strpos($string, ' ') !== false;
+		return str_contains($string, ' ');
 	}
 }
